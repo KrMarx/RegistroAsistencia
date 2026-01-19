@@ -233,9 +233,8 @@ Los endpoints incluyen validaciones automáticas:
 
 ## 📄 Licencia
 
-Este proyecto es parte de una demostración técnica de Softtek.
+Este proyecto es parte de una demostración técnica.
 
 ## 👥 Autor
 
 Demo Spring WebFlux
-
