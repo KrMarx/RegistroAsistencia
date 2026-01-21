@@ -233,7 +233,7 @@ Los endpoints incluyen validaciones automáticas:
 
 ## 📄 Licencia
 
-Este proyecto es parte de una demostración técnica para entrevista.
+Este proyecto es parte de una demostración técnica para entrevista developer.
 
 ## 👥 Autor
 
