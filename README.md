@@ -215,7 +215,7 @@ src/main/java/com/softtek/demo_spring_webflux/
     │   └── outbound/
     │       └── persistence/        # Implementaciones R2DBC
     └── config/                     # Configuraciones
-        └── OpenApiConfig.java
+        └── OpenApiConfig.javaGIT 
 ```
 
 ## 🔐 Validaciones
