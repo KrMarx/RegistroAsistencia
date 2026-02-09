@@ -185,6 +185,36 @@ docker run --name postgres-employee-db \
   -d postgres:15
 ```
 
+en su reemplazo para windows usar: 
+```bash
+docker run --name postgres-employee-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=employee_db -p 5432:5432 -d postgres:15
+```upd
+
+🔍 Cómo verificar qué proceso usa el puerto
+  netstat -ano | findstr :5432
+  tasklist | findstr <PID>
+
+Detener contenedores existentes:
+  docker ps
+  docker stop <container_id>
+
+Eliminar contenedor viejo:
+  docker rm postgres-employee-db
+
+Volver a crear el contenedor
+  docker ps //para probar conexión
+
+Tambien se puede ejecutar:
+```bash
+  docker-compose up
+```
+
+para eliminar:
+```bash
+  docker-compose down
+```
+
+
 ## 📂 Estructura del Proyecto
 
 ```
@@ -238,3 +268,74 @@ Este proyecto es parte de una demostración técnica para entrevista developer.
 ## 👥 Autor
 
 Demo Spring WebFlux
+
+## 🔧 Solución de Problemas
+
+### Error: "password authentication failed" al conectar con pgAdmin
+
+**Causa:** PostgreSQL local (instalado en Windows) está usando el puerto 5432.
+
+**Solución:**
+1. Detener servicios de PostgreSQL en Windows:
+   - `Windows + R` → `services.msc`
+   - Buscar "postgresql" → Clic derecho → **Detener**
+
+2. Verificar que solo Docker usa el puerto:
+```powershell
+   netstat -ano | findstr :5432
+```
+
+3. Reiniciar Docker:
+```powershell
+   docker-compose down
+   docker-compose up
+```
+
+---
+
+### Error: "docker daemon is not running"
+
+**Solución:** Abre **Docker Desktop** y espera que inicie completamente.
+
+---
+
+### La aplicación no se conecta a PostgreSQL
+
+**Verificar que PostgreSQL está listo:**
+```powershell
+docker exec -it employee-db-postgres psql -U postgres -d employee_db
+```
+
+---
+
+## 📌 Comandos Útiles
+```powershell
+# Ver contenedores corriendo
+docker ps
+
+# Ver logs
+docker logs employee-db-postgres
+
+# Reiniciar todo
+docker-compose down
+docker-compose up
+
+# Eliminar todo (incluye datos)
+docker-compose down -v
+```
+
+---
+
+## 🔄 Workflow Diario
+
+**Inicio:**
+```powershell
+docker-compose up -d          # Levantar PostgreSQL en background
+.\gradlew.bat bootRun         # Levantar la aplicación
+```
+
+**Fin:**
+```powershell
+Ctrl + C                      # Detener la aplicación
+docker-compose down           # Detener Docker (opcional)
+```
